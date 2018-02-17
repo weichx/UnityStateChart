@@ -79,16 +79,18 @@ namespace Util {
 
             while (ptr != null) {
                 ptr = ptr.activeSubstate;
-                stringBuilder.Append(ptr.id);
 
-                if (ptr.activeSubstate != null) {
-                    stringBuilder.Append(" -> ");
+                if (ptr != null) {
+                    stringBuilder.Append(ptr.id);
+
+                    if (ptr.activeSubstate != null) {
+                        stringBuilder.Append(" -> ");
+                    }
                 }
-
             }
             return stringBuilder.ToString();
         }
-        
+
         private void GoToState(string stateName, StateChartState from) {
             StateChartState target;
 
