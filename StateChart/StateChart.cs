@@ -61,6 +61,34 @@ namespace Util {
             return stateMap.TryGetValue(stateName, out state) && state.isActive;
         }
 
+
+        public string GetCurrentStateName() {
+            StateChartState ptr = rootState;
+            string id = String.Empty;
+            while (ptr != null) {
+                id = ptr.id;
+                ptr = ptr.activeSubstate;
+            }
+
+            return id;
+        }
+        
+        public string GetStatePath() {
+            stringBuilder.Length = 0;
+            StateChartState ptr = rootState;
+
+            while (ptr != null) {
+                ptr = ptr.activeSubstate;
+                stringBuilder.Append(ptr.id);
+
+                if (ptr.activeSubstate != null) {
+                    stringBuilder.Append(" -> ");
+                }
+
+            }
+            return stringBuilder.ToString();
+        }
+        
         private void GoToState(string stateName, StateChartState from) {
             StateChartState target;
 
